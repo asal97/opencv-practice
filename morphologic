@@ -1,0 +1,23 @@
+import cv2 as cv
+from matplotlib import pyplot as plt
+import numpy as np
+
+kernel = np.ones((2,2),np.uint8)
+
+img = cv.imread("C:\\Users\\10\\Desktop\\smarties.png",0)
+_, mask = cv.threshold(img,220,255,cv.THRESH_BINARY_INV)
+dilation = cv.dilate(mask,kernel , iterations=2 )
+erosion = cv.erode(mask,kernel,iterations=2)
+opening = cv.morphologyEx(mask,cv.MORPH_OPEN,kernel)
+closing = cv.morphologyEx(mask,cv.MORPH_CLOSE,kernel)
+mg = cv.morphologyEx(mask,cv.MORPH_GRADIENT,kernel)
+th = cv.morphologyEx(mask,cv.MORPH_TOPHAT,kernel)
+titles = ['img','mask','dilation','erosion','opening','closing','mg','th']
+images = [img,mask,dilation,erosion,opening,closing,mg,th]
+
+
+for i in range(8):
+    plt.subplot(2,4,i+1),plt.imshow(images[i],'gray')
+    plt.title(titles[i])
+    plt.xticks([]), plt.yticks([])
+plt.show()

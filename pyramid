@@ -1,0 +1,24 @@
+import cv2
+import numpy as np
+img = cv2.imread("C:\\Users\\10\\Desktop\\lena.jpg",-1)
+
+
+layer = img.copy()
+gp = [layer]
+
+for i in range(6):
+    layer = cv2.pyrDown(layer)
+    gp.append(layer)
+    cv2.imshow(str(i) , layer)
+
+layer = gp[5]
+cv2.imshow('Upward level Gaussian Pyramid',layer)
+lp = [layer]
+
+for i in range(5,0,-1):
+    guas_ex = cv2.pyrUp(gp[i])
+    lap = cv2.subtract(gp[i-1],guas_ex)
+    cv2.imshow(str(i),lap)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()

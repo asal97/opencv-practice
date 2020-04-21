@@ -1,0 +1,20 @@
+import cv2
+import numpy as np
+#img = np.zeros([900,900,3],np.uint8)
+img = cv2.imread("C:\\Users\\10\\Desktop\\lena.jpg",-1)
+img = cv2.resize(img,(900,900))
+#img = cv2.rectangle(img,(800,0),(300,100),(255,255,255),-1)
+img2 = cv2.imread("C:\\Users\\10\\Desktop\\img.jpg",-1)
+
+bitAnd = cv2.bitwise_and(img,img2)
+bitOr = cv2.bitwise_or(img,img2)
+bitXor = cv2.bitwise_xor(img,img2)
+cv2.imshow('bitXor',bitXor)
+
+cv2.imshow('bitOr',bitOr)
+cv2.imshow('bitAnd',bitAnd)
+cv2.imshow('img', img)
+cv2.imshow('image', img2)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()

@@ -1,0 +1,21 @@
+import cv2
+import datetime
+cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH,1208)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT,1208)
+print(cap.isOpened())
+while(cap.isOpened()):
+    ret,frame = cap.read()
+    if ret == True :
+        font = cv2.FONT_HERSHEY_SCRIPT_SIMPLEX
+        date = str(datetime.datetime.now())
+        text = "width : " + str(cap.get(3))+"  height : " + str(cap.get(4))
+        cv2.putText(frame,date,(100,100),font,2,(255,0,0),2,cv2.LINE_AA)
+        cv2.imshow('frame',frame)
+
+        if cv2.waitKey(1) == ord('q'):
+            break
+    else :
+        break
+cap.release()
+cv2.destroyAllWindows()
